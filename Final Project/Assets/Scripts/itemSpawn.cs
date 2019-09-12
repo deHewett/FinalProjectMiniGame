@@ -9,6 +9,10 @@ public class itemSpawn : MonoBehaviour
     public GameObject trash;
     public GameObject treasure;
     System.Random rand = new System.Random();
+    int spawnCount = 0;
+
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,11 +27,21 @@ public class itemSpawn : MonoBehaviour
         {
             timerEnded();
         }
+        if(spawnCount >= 5)
+        {
+            spawnCount = 0;
+            storedTime -= 0.2f;
+            if (storedTime <= 1)
+            {
+                storedTime = 1;
+            }
+        }
     }
     void timerEnded()
     {
         rand = new System.Random();
         int spawnDecision = rand.Next(0, 2);
+        spawnCount++;
         if(spawnDecision == 0)
         {
             targetTime = storedTime;

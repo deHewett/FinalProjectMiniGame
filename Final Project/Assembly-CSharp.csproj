@@ -55,9 +55,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\comboDisplay.cs" />
      <Compile Include="Assets\Scripts\gameController.cs" />
      <Compile Include="Assets\Scripts\itemSpawn.cs" />
+     <Compile Include="Assets\Scripts\livesDisplay.cs" />
      <Compile Include="Assets\Scripts\playerController.cs" />
+     <Compile Include="Assets\Scripts\scoreDisplay.cs" />
+     <Compile Include="Assets\Scripts\trashController.cs" />
+     <Compile Include="Assets\Scripts\treasureController.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>D:/FinalProjectMiniGame/Final Project/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
