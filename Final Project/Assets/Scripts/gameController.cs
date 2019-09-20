@@ -11,7 +11,7 @@ public class gameController : MonoBehaviour
     public int combo = 1;
     public int lives = 3;
     private int count = 0;
-    float roundTime = 120f;
+    float roundTime = 30f;
     public GameObject endScreen;
     public Text round1score;
     public Text round2score;
@@ -20,7 +20,6 @@ public class gameController : MonoBehaviour
     public Text rewardText;
     public int timer;
     public GameObject timerText;
-    int counter = 1;
     public Text title;
 
     public int round1=0;
@@ -32,17 +31,16 @@ public class gameController : MonoBehaviour
     private string rewardM = "MEDIUM";
     private string rewardL = "LARGE";
 
-    bool roundOver = false;
-    bool doOnceBool = false;
-
     // Start is called before the first frame update
     void Start()
     {
+        roundTime = 30f;
         score = 0;
         
     }
     private void Awake()
     {
+        roundTime = 30f;
 
         int numControllers = FindObjectsOfType<gameController>().Length;
         if (numControllers != 1)
@@ -56,18 +54,19 @@ public class gameController : MonoBehaviour
     }
     void OnEnable()
     {
-
+        roundTime = 30f;
         SceneManager.sceneLoaded += onSceneLoaded;
     }
     void onSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-
+        roundTime = 30f;
         score = 0;
         lives = 3;
 
     }
     void OnDisable()
     {
+        roundTime = 30f;
         SceneManager.sceneLoaded -= onSceneLoaded;
     }
 
@@ -85,7 +84,7 @@ public class gameController : MonoBehaviour
             Debug.Log(e);
         }
         
-        if (lives <= 0)
+        if ((lives <= 0 && SceneManager.GetActiveScene().name == "Level 1") || (lives <= 0 && SceneManager.GetActiveScene().name == "Level 3"))
         {
             if (SceneManager.GetActiveScene().name == "Level 1")
             {
@@ -116,8 +115,9 @@ public class gameController : MonoBehaviour
                 
             }
         }
-        if (roundTime <= 0)
+        if (roundTime <= 0 && SceneManager.GetActiveScene().name == "Level 2")
         {
+            roundTime = 0;
             if (SceneManager.GetActiveScene().name == "Level 2")
                 {
                     round2 = score;

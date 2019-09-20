@@ -53,10 +53,10 @@ public class itemSpawn : MonoBehaviour
             if (spawnCount >= 5)
             {
                 spawnCount = 0;
-                storedTime -= 0.2f;
-                if (storedTime <= 1)
+                storedTime -= 0.1f;
+                if (storedTime <= 0.6)
                 {
-                    storedTime = 1;
+                    storedTime = 0.6f;
                 }
             }
         }
@@ -78,13 +78,12 @@ public class itemSpawn : MonoBehaviour
                 spawnCount++;
                 if (spawnDecision == 0)
                 {
-                    rand = new System.Random();
+                    
                     targetTime = storedTime;
                     Instantiate(trash, new Vector3(rand.Next(-9, 9), 5.7f, 0), Quaternion.identity);
                 }
                 if (spawnDecision == 1)
                 {
-                    rand = new System.Random();
                     targetTime = storedTime;
                     Instantiate(treasure, new Vector3(rand.Next(-9, 9), 5.7f, 0), Quaternion.identity);
                 }

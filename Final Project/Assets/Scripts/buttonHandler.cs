@@ -23,7 +23,7 @@ public class buttonHandler : MonoBehaviour
         }
         if (SceneManager.GetActiveScene().name == "Level 3")
         {
-            SceneManager.LoadScene("Title");
+            Application.Quit();
         }
     }
 }

@@ -67,6 +67,7 @@
      <Compile Include="Assets\Scripts\startGame.cs" />
      <Compile Include="Assets\Scripts\trashController.cs" />
      <Compile Include="Assets\Scripts\treasureController.cs" />
+     <None Include="Assets\OFL.txt" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>D:/FinalProjectMiniGame/Final Project/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
