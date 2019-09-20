@@ -5,28 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class buttonHandler : MonoBehaviour
 {
-    Scene currentScene;
-    string sceneName;
     void Start()
     {
-        currentScene = SceneManager.GetActiveScene();
-        sceneName = currentScene.name;
     }
 
     // Update is called once per frame
     public void nextScene()
     {
-        if(sceneName == "1")
+        if(SceneManager.GetActiveScene().name == "Level 1")
         {
-            SceneManager.LoadScene("2");
+            SceneManager.LoadScene("Level 2");
+            
         }
-        if (sceneName == "2")
+        if (SceneManager.GetActiveScene().name == "Level 2")
         {
-            SceneManager.LoadScene("3");
+            SceneManager.LoadScene("Level 3");
         }
-        if (sceneName == "3")
+        if (SceneManager.GetActiveScene().name == "Level 3")
         {
-            Application.Quit();
+            SceneManager.LoadScene("Title");
         }
     }
 }

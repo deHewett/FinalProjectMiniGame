@@ -11,12 +11,17 @@ public class gameController : MonoBehaviour
     public int combo = 1;
     public int lives = 3;
     private int count = 0;
+    float roundTime = 120f;
     public GameObject endScreen;
     public Text round1score;
     public Text round2score;
     public Text round3score;
     public Text final;
     public Text rewardText;
+    public int timer;
+    public GameObject timerText;
+    int counter = 1;
+    public Text title;
 
     public int round1=0;
     public int round2=0;
@@ -26,62 +31,106 @@ public class gameController : MonoBehaviour
     private string rewardS = "SMALL";
     private string rewardM = "MEDIUM";
     private string rewardL = "LARGE";
+
+    bool roundOver = false;
+    bool doOnceBool = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(this);
         score = 0;
-        Time.timeScale = 1;
+        
+    }
+    private void Awake()
+    {
+
+        int numControllers = FindObjectsOfType<gameController>().Length;
+        if (numControllers != 1)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+    }
+    void OnEnable()
+    {
+
+        SceneManager.sceneLoaded += onSceneLoaded;
+    }
+    void onSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+
+        score = 0;
+        lives = 3;
+
+    }
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= onSceneLoaded;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(lives <= 0)
+        title.text = SceneManager.GetActiveScene().name;
+      
+        roundTime -= Time.deltaTime;
+        try {
+            timerText.GetComponent<Text>().text = "Time remaining: " + roundTime.ToString();
+        }
+        catch(Exception e)
         {
-            endScreen.SetActive(true);
-            if (round1 == 0)
+            Debug.Log(e);
+        }
+        
+        if (lives <= 0)
+        {
+            if (SceneManager.GetActiveScene().name == "Level 1")
             {
                 round1 = score;
                 round1score.text = round1.ToString();
+                round2score.text = round2.ToString();
+                round3score.text = round3.ToString();
                 getReward();
                 finalScore = round1;
                 final.text = finalScore.ToString();
-                Time.timeScale = 0;
+                //Time.timeScale = 0;
 
             }
-            else 
-            {
-                if (round2 == 0) {
-                    round2 = score;
+            else
+            { 
+                if (SceneManager.GetActiveScene().name == "Level 3")
+                {
+                    round3 = score;
+                    round1score.text = round1.ToString();
                     round2score.text = round2.ToString();
+                    round3score.text = round3.ToString();
                     getReward();
                     finalScore += round2;
                     final.text = finalScore.ToString();
-                    Time.timeScale = 0;
+                    //Time.timeScale = 0;
+
                 }
-                else
-                {
-                    if (round3 == 0)
-                    {
-                        round3 = score;
-                        round3score.text = round3.ToString();
-                        getReward();
-                        finalScore += round2;
-                        final.text = finalScore.ToString();
-                        Time.timeScale = 0;
-
-                    }
-                }        
+                
             }
-
+        }
+        if (roundTime <= 0)
+        {
+            if (SceneManager.GetActiveScene().name == "Level 2")
+                {
+                    round2 = score;
+                    round1score.text = round1.ToString();
+                    round2score.text = round2.ToString();
+                    round3score.text = round3.ToString();
+                    getReward();
+                    finalScore += round2;
+                    final.text = finalScore.ToString();
+                    //Time.timeScale = 0;
+                }
+                
             
-            
-            
-           
-            
-            
-
         }
     }
 
@@ -118,4 +167,7 @@ public class gameController : MonoBehaviour
         count = 0;
         lives--;
     }
+
 }
+
+
